@@ -9,7 +9,7 @@
     <meta property="og:title" content="Stream Center Pro - Entretenimiento Premium">
     <meta property="og:description" content="¡Netflix, Disney+, Max y más al mejor precio! Disfruta de tus series y películas favoritas sin interrupciones.">
     <meta property="og:image" content="https://i.imgur.com/gvQEbBC.jpeg">
-    <meta property="og:url" content="https://tu-dominio.com">
+    <meta property="og:url" content="https://streamcenterpro.shop">
     <meta property="og:type" content="website">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -175,13 +175,12 @@
                             </div>
                         </div>
                         <div>
-                            <label style="font-size:12px; color:var(--text-muted);">Mensaje Predeterminado (Con enlace web)</label>
-                            <textarea id="mkt-mensaje" class="input-form" style="height: 120px; resize:none; margin-top:5px;" required>¡Hola! Somos SCenterPro 🎬📺. Tenemos una promoción especial para ti en Netflix, Disney+ y Max. ¡Pregúntanos por nuestros planes y no te pierdas tus series favoritas!&#10;&#10;Mira nuestras promociones y adquiere tu plan aquí: https://tu-dominio.com</textarea>
+                            <label style="font-size:12px; color:var(--text-muted);">Mensaje Predeterminado</label>
+                            <textarea id="mkt-mensaje" class="input-form" style="height: 120px; resize:none; margin-top:5px;" required>¡Hola! Somos SCenterPro 🎬📺. Tenemos una promoción especial para ti en Netflix, Disney+ y Max. ¡Pregúntanos por nuestros planes y no te pierdas tus series favoritas!&#10;&#10;Mira nuestras promociones aquí: https://streamcenterpro.shop</textarea>
                         </div>
                         <div>
-                            <label style="font-size:12px; color:var(--text-muted);">Enlace de Imagen Extra (Déjalo en blanco si usas el de tu web)</label>
+                            <label style="font-size:12px; color:var(--text-muted);">Enlace de Imagen Extra (Opcional)</label>
                             <input type="url" id="mkt-imagen" class="input-form" style="margin-top:5px;" placeholder="Ej: https://i.imgur.com/imagen.jpg">
-                            <span style="font-size:10px; color:#f5a623;">*Tu página web ya generará la vista previa. Usa esto solo si quieres enviar un link directo a otra foto.</span>
                         </div>
                         <button type="submit" class="red-btn" style="background:#25D366; margin-top:10px;"><i class="fa-brands fa-whatsapp"></i> Enviar Publicidad</button>
                     </form>
@@ -223,25 +222,7 @@
             </header>
             
             <div id="catalogo-section" class="platforms-grid">
-                
-                <div class="platform-card netflix glass-panel" data-plataforma="Netflix">
-                    <div class="platform-header"><img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix"></div>
-                    <div class="plan-item" data-plan="Alquiler por Perfil" data-precio="10">
-                        <div class="plan-details"><span class="plan-name">Alquiler por Perfil</span><span class="plan-price">S/ 10.00</span></div>
-                        <button class="buy-btn">Adquirir</button>
-                    </div>
-                    <div class="plan-item special-plan" data-plan="Perfil Personalizado" data-precio="15">
-                        <div class="ribbon-oferta">✨ NUEVO</div>
-                        <div class="plan-details"><span class="plan-name">Perfil Personalizado</span><span style="font-size: 11px; color: var(--text-muted);">Usa tu propio correo</span><span class="plan-price">S/ 15.00</span></div>
-                        <button class="buy-btn" id="btn-netflix-custom">Adquirir</button>
-                    </div>
-                    <div class="plan-item" data-plan="Cuenta Completa (Premium)" data-precio="40">
-                        <div class="ribbon-popular">⭐ MÁS VENDIDO</div>
-                        <div class="plan-details"><span class="plan-name">Cuenta Completa (Premium)</span><span class="plan-price">S/ 40.00</span></div>
-                        <button class="buy-btn">Adquirir</button>
-                    </div>
-                </div>
-
+                <div class="platform-card netflix glass-panel" data-plataforma="Netflix"><div class="platform-header"><img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix"></div><div class="plan-item" data-plan="Alquiler por Perfil" data-precio="10"><div class="plan-details"><span class="plan-name">Alquiler por Perfil</span><span class="plan-price">S/ 10.00</span></div><button class="buy-btn">Adquirir</button></div><div class="plan-item special-plan" data-plan="Perfil Personalizado" data-precio="15"><div class="ribbon-oferta">✨ NUEVO</div><div class="plan-details"><span class="plan-name">Perfil Personalizado</span><span style="font-size: 11px; color: var(--text-muted);">Usa tu propio correo</span><span class="plan-price">S/ 15.00</span></div><button class="buy-btn" id="btn-netflix-custom">Adquirir</button></div><div class="plan-item" data-plan="Cuenta Completa (Premium)" data-precio="40"><div class="ribbon-popular">⭐ MÁS VENDIDO</div><div class="plan-details"><span class="plan-name">Cuenta Completa (Premium)</span><span class="plan-price">S/ 40.00</span></div><button class="buy-btn">Adquirir</button></div></div>
                 <div class="platform-card disney glass-panel" data-plataforma="Disney+"><div class="platform-header"><img src="https://logodownload.org/wp-content/uploads/2020/11/disney-plus-logo-1.png" class="white-logo" alt="Disney+"></div><div class="plan-item" data-plan="Alquiler por Perfil" data-precio="10"><div class="plan-details"><span class="plan-name">Alquiler por Perfil</span><span class="plan-price">S/ 10.00</span></div><button class="buy-btn">Adquirir</button></div><div class="plan-item" data-plan="Cuenta Completa (Premium)" data-precio="30"><div class="plan-details"><span class="plan-name">Cuenta Completa (Premium)</span><span class="plan-price">S/ 30.00</span></div><button class="buy-btn">Adquirir</button></div><div class="plan-item special-plan" data-plan="Único Pago (Con tu correo)" data-precio="35"><div class="ribbon-oferta">🔥 MEJOR PRECIO</div><div class="plan-details"><span class="plan-name">Único Pago (Con tu correo)</span><span class="plan-price">S/ 35.00</span></div><button class="buy-btn">Adquirir</button></div></div>
                 <div class="platform-card max glass-panel" data-plataforma="HBO Max"><div class="platform-header"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Max_logo.svg" class="white-logo" alt="Max"></div><div class="plan-item" data-plan="Alquiler por Perfil" data-precio="10"><div class="plan-details"><span class="plan-name">Alquiler por Perfil</span><span class="plan-price">S/ 10.00</span></div><button class="buy-btn">Adquirir</button></div><div class="plan-item" data-plan="Cuenta Completa (Estándar)" data-precio="10"><div class="plan-details"><span class="plan-name">Cuenta Completa (Estándar)</span><span class="plan-price">S/ 10.00</span></div><button class="buy-btn">Adquirir</button></div><div class="plan-item special-plan" data-plan="Único Pago (Con tu correo)" data-precio="15"><div class="ribbon-oferta">🔥 MEJOR PRECIO</div><div class="plan-details"><span class="plan-name">Único Pago (Con tu correo)</span><span class="plan-price">S/ 15.00</span></div><button class="buy-btn">Adquirir</button></div></div>
                 <div class="platform-card amazon glass-panel" data-plataforma="Amazon Prime"><div class="platform-header"><img src="https://upload.wikimedia.org/wikipedia/commons/1/11/Amazon_Prime_Video_logo.svg" class="white-logo" alt="Amazon Prime"></div><div class="plan-item" data-plan="Alquiler por Perfil" data-precio="10"><div class="plan-details"><span class="plan-name">Alquiler por Perfil</span><span class="plan-price">S/ 10.00</span></div><button class="buy-btn">Adquirir</button></div><div class="plan-item" data-plan="Cuenta Completa" data-precio="12"><div class="plan-details"><span class="plan-name">Cuenta Completa</span><span class="plan-price">S/ 12.00</span></div><button class="buy-btn">Adquirir</button></div></div>
@@ -309,7 +290,7 @@
                 <input type="text" id="vm-perfil-asig" placeholder="Nombre/Pin del Perfil (Opcional)" class="input-form">
                 <div style="display: flex; gap:10px;">
                     <div style="flex:1;"><label style="font-size:12px; color:#9ba0b5;">Fecha Inicio</label><input type="date" id="vm-inicio" class="input-form" required></div>
-                    <div style="flex:1;"><label style="font-size:12px; color:#9ba0b5;">Fecha Fin</label><input type="date" id="vm-fin" class="input-form" required></div>
+                    <div style="flex:1;"><label style="font-size:12px; color:%9ba0b5;">Fecha Fin</label><input type="date" id="vm-fin" class="input-form" required></div>
                 </div>
                 <button type="submit" class="red-btn" style="background: #1DB954; margin-top:10px;"><i class="fa-solid fa-save"></i> Guardar Venta</button>
             </form>
@@ -318,6 +299,6 @@
 
     <a href="https://wa.me/51922096440?text=Hola,%20necesito%20ayuda" class="floating-whatsapp" target="_blank" title="Soporte por WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
     <footer>creado por AdonaHack</footer>
-    <script type="module" src="app.js?v=16"></script>
+    <script type="module" src="app.js?v=21"></script>
 </body>
 </html>
