@@ -557,6 +557,7 @@ async function cargarHistorialMarketing() {
                                 <option value="ENVIADO" ${item.estado==='ENVIADO'?'selected':''}>Enviado</option>
                                 <option value="RESPONDIO" ${item.estado==='RESPONDIO'?'selected':''}>Respondió</option>
                                 <option value="NO INTERESA" ${item.estado==='NO INTERESA'?'selected':''}>No Interesa</option>
+                                <option value="SIN WHATSAPP" ${item.estado==='SIN WHATSAPP'?'selected':''}>Sin WhatsApp</option>
                             </select>
                         </td>
                     </tr>
