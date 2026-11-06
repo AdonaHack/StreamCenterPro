@@ -508,23 +508,26 @@ async function handleVentaManual(e) {
     }
 }
 
-// === MARKETING ACTUALIZADO ===
+// === MARKETING MEJORADO (Emojis Inyectados vía JS) ===
 async function handleMarketing(e) {
     e.preventDefault();
     const numero = document.getElementById('mkt-numero').value;
-    const mensaje = document.getElementById('mkt-mensaje').value;
+    let mensajeBase = document.getElementById('mkt-mensaje').value;
+    
+    // Inyectamos los emojis explícitos de claqueta y TV justo después de 'SCenterPro'
+    let mensajeConEmojis = mensajeBase.replace('Somos SCenterPro.', 'Somos SCenterPro 🎬📺.');
     
     try {
         await fetch(`${API_URL}/marketing_enviar`, {
             method: 'POST', headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ numero, mensaje })
+            body: JSON.stringify({ numero, mensaje: mensajeConEmojis })
         });
         
         cargarHistorialMarketing();
         document.getElementById('mkt-numero').value = '';
         
-        // encodeURIComponent arregla los emojis y saltos de línea para WhatsApp
-        window.open(`https://wa.me/51${numero}?text=${encodeURIComponent(mensaje)}`, '_blank');
+        // encodeURIComponent se encarga de empaquetar el emoji en un formato que WhatsApp no pueda romper
+        window.open(`https://wa.me/51${numero}?text=${encodeURIComponent(mensajeConEmojis)}`, '_blank');
         
     } catch(err) {
         Swal.fire('Error', 'Problema al guardar historial', 'error');
