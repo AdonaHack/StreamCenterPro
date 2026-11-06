@@ -1,4 +1,4 @@
-const API_URL = 'http://127.0.0.1:5000';
+const API_URL = 'https://streamcenterpro.shop';
 const WHATSAPP_NUMERO = "51922096440"; 
 
 const authSection = document.getElementById('auth-section');
