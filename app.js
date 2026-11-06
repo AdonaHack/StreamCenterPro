@@ -508,6 +508,7 @@ async function handleVentaManual(e) {
     }
 }
 
+// === MARKETING ACTUALIZADO ===
 async function handleMarketing(e) {
     e.preventDefault();
     const numero = document.getElementById('mkt-numero').value;
@@ -522,6 +523,7 @@ async function handleMarketing(e) {
         cargarHistorialMarketing();
         document.getElementById('mkt-numero').value = '';
         
+        // encodeURIComponent arregla los emojis y saltos de línea para WhatsApp
         window.open(`https://wa.me/51${numero}?text=${encodeURIComponent(mensaje)}`, '_blank');
         
     } catch(err) {
