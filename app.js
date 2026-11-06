@@ -546,6 +546,8 @@ async function cargarHistorialMarketing() {
         if(data.length > 0) {
             data.forEach(item => {
                 let color = item.estado === 'ENVIADO' ? 'text-green' : 'text-red';
+                if(item.estado === 'SIN WHATSAPP') color = 'text-muted';
+                
                 tbody.innerHTML += `
                     <tr>
                         <td><small>${item.fecha}</small></td>
