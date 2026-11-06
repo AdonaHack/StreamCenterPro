@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
@@ -21,11 +21,9 @@ scope = [
 creds_json_str = os.environ.get("GOOGLE_CREDENTIALS")
 
 if creds_json_str:
-    # Si estamos en Render (Producción), lee de las variables secretas
     creds_dict = json.loads(creds_json_str)
     creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
 else:
-    # Si estamos en tu computadora (Local), lee del archivo físico
     creds = ServiceAccountCredentials.from_json_keyfile_name("credenciales.json", scope)
 
 client = gspread.authorize(creds)
@@ -35,6 +33,11 @@ sheet_usuarios = client.open_by_key(SHEET_ID).worksheet("USUARIOS")
 sheet_streaming = client.open_by_key(SHEET_ID).worksheet("STREAMING")
 sheet_pedidos = client.open_by_key(SHEET_ID).worksheet("PEDIDOS")
 sheet_marketing = client.open_by_key(SHEET_ID).worksheet("MARKETING")
+
+# === RUTA PRINCIPAL (SOLUCIÓN ERROR 404) ===
+@app.route('/')
+def home():
+    return app.send_static_file('index.html')
 
 # === SISTEMA ANTI-CORTES DE GOOGLE ===
 def fetch_con_reintento(sheet_obj, retries=3):
