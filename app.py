@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
@@ -9,7 +9,9 @@ import os
 import json
 from datetime import datetime
 
-app = Flask(__name__)
+# === INICIALIZACIÓN CONFIGURADA PARA LA RAÍZ ===
+# Esto le dice a Flask que sirva los archivos estáticos desde la misma carpeta del script
+app = Flask(__name__, static_folder=os.path.abspath('.'), static_url_path='')
 CORS(app)
 
 scope = [
@@ -34,7 +36,7 @@ sheet_streaming = client.open_by_key(SHEET_ID).worksheet("STREAMING")
 sheet_pedidos = client.open_by_key(SHEET_ID).worksheet("PEDIDOS")
 sheet_marketing = client.open_by_key(SHEET_ID).worksheet("MARKETING")
 
-# === RUTA PRINCIPAL (SOLUCIÓN ERROR 404) ===
+# === RUTA PRINCIPAL (SOLUCIÓN AL ERROR 404) ===
 @app.route('/')
 def home():
     return app.send_static_file('index.html')
