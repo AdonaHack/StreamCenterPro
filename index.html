@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stream Center Pro</title>
+    
+    <!-- Meta Etiquetas para Vista Previa en WhatsApp y Redes Sociales -->
+    <meta property="og:title" content="Stream Center Pro - Entretenimiento Premium">
+    <meta property="og:description" content="¡Netflix, Disney+, Max y más al mejor precio! Disfruta de tus series y películas favoritas sin interrupciones.">
+    <meta property="og:image" content="https://i.imgur.com/gvQEbBC.jpeg">
+    <meta property="og:url" content="https://tu-dominio.com">
+    <meta property="og:type" content="website">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Auth Section -->
+        <div id="auth-section" class="container glass-panel">
+            <h1 class="main-title">
+                <span class="brand-gradient">STREAM CENTER</span> <span class="brand-white">PRO</span>
+            </h1>
+            <div class="form-toggle">
+                <button id="btn-show-login" class="active">Iniciar Sesión</button>
+                <button id="btn-show-register">Registrarse</button>
+            </div>
+            <form id="login-form" class="auth-form">
+                <div class="input-group">
+                    <i class="fa-regular fa-envelope"></i>
+                    <input type="email" id="login-email" placeholder="Correo electrónico" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="login-password" placeholder="Contraseña" required>
+                </div>
+                <button type="submit" class="red-btn">Ingresar a mi cuenta</button>
+            </form>
+            <form id="register-form" class="auth-form hidden">
+                <div class="input-group">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" id="reg-username" placeholder="Nombre de usuario" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-phone"></i>
+                    <input type="tel" id="reg-phone" placeholder="Número de teléfono" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-regular fa-envelope"></i>
+                    <input type="email" id="reg-email" placeholder="Correo electrónico" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="reg-password" placeholder="Contraseña" required>
+                </div>
+                <button type="submit" class="red-btn">Crear Cuenta Premium</button>
+            </form>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- DASHBOARD ADMINISTRADOR                    -->
+        <!-- ========================================== -->
+        <div id="admin-dashboard" class="dashboard-container hidden">
+            <header class="dashboard-header glass-panel">
+                <h2 class="brand-gradient">Panel Administrativo</h2>
+                <div class="header-actions">
+                    <button class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Salir</button>
+                </div>
+            </header>
+            
+            <div class="glass-panel" style="padding: 30px; border-radius: 20px;">
+                <h3 class="brand-white" style="margin-top:0; margin-bottom: 25px;"><i class="fa-solid fa-warehouse"></i> Inventario de Cuentas Matrices</h3>
+                <div class="admin-summary">
+                    <div class="summary-card" style="flex: none; width: 300px; margin: 0 auto;">
+                        <h4>Inversión en Proveedores</h4>
+                        <span id="admin-inversion" class="text-red">S/ 0.00</span>
+                    </div>
+                </div>
+                <div style="overflow-x: auto; margin-bottom: 40px;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Plataforma</th>
+                                <th>Correo Matriz</th>
+                                <th>Costo</th>
+                                <th>Perfiles Totales</th>
+                                <th>Libres</th>
+                                <th>Vencimiento Matriz</th>
+                                <th>Alerta Proveedor</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-table-body"></tbody>
+                    </table>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 20px; background: rgba(0,0,0,0.2); padding: 15px 20px; border-radius: 12px; border: 1px solid var(--border-color);">
+                    <h3 class="brand-white" style="margin:0;"><i class="fa-solid fa-users-gear"></i> Monitor de Ventas</h3>
+                    
+                    <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                        <div class="input-group" style="width: auto; margin: 0;">
+                            <i class="fa-solid fa-search" style="left: 15px; z-index: 10; pointer-events: none;"></i>
+                            <input type="text" id="filtro-texto" placeholder="Buscar cliente o correo..." style="padding: 10px 15px 10px 40px; width: 220px; border-radius: 8px;">
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; background: rgba(255,255,255,0.05); border-radius: 8px; border: 1px solid var(--border-color); padding: 2px;">
+                            <button id="btn-mes-ant" style="background:none; border:none; color:white; padding: 8px 12px; cursor:pointer;"><i class="fa-solid fa-chevron-left"></i></button>
+                            <input type="month" id="filtro-mes" style="background:transparent; border:none; color:white; outline:none; font-family:'Inter', sans-serif; cursor:pointer; width: 130px; text-align:center;">
+                            <button id="btn-mes-sig" style="background:none; border:none; color:white; padding: 8px 12px; cursor:pointer;"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                        
+                        <button id="btn-abrir-venta-manual" class="red-btn" style="background: #1DB954; margin: 0; padding: 10px 15px; font-size: 13px;"><i class="fa-solid fa-plus"></i> Venta Externa</button>
+                    </div>
+                </div>
+                
+                <div class="admin-summary" style="margin-bottom: 20px;">
+                    <div class="summary-card" style="padding: 15px;">
+                        <h4 style="font-size: 12px;">Ingresos (Ventas)</h4>
+                        <span id="monitor-ingresos" style="color: #3b82f6; font-size: 20px;">S/ 0.00</span>
+                    </div>
+                    <div class="summary-card" style="padding: 15px;">
+                        <h4 style="font-size: 12px;">Costo de Perfiles</h4>
+                        <span id="monitor-costos" class="text-red" style="font-size: 20px;">S/ 0.00</span>
+                    </div>
+                    <div class="summary-card" style="padding: 15px;">
+                        <h4 style="font-size: 12px;">Ganancia Neta</h4>
+                        <span id="monitor-ganancia" class="text-green" style="font-size: 20px;">S/ 0.00</span>
+                    </div>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Servicio Adquirido</th>
+                                <th>Fecha Compra</th>
+                                <th>Correo Asignado</th>
+                                <th>Perfil</th>
+                                <th>Ingreso</th>
+                                <th>Costo</th>
+                                <th>Ganancia</th>
+                                <th>Vence</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-monitor-body"></tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- DASHBOARD MARKETING                        -->
+        <!-- ========================================== -->
+        <div id="marketing-dashboard" class="dashboard-container hidden">
+            <header class="dashboard-header glass-panel">
+                <h2 class="brand-gradient">Panel de Marketing</h2>
+                <div class="header-actions">
+                    <button class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Salir</button>
+                </div>
+            </header>
+            
+            <div style="display:flex; flex-wrap:wrap; gap:30px;">
+                <div class="glass-panel" style="flex:1; min-width:300px; padding:30px; border-radius:20px;">
+                    <h3 class="brand-white" style="margin-top:0;"><i class="fa-solid fa-bullhorn"></i> Lanzar Campaña</h3>
+                    <form id="form-marketing" style="display:flex; flex-direction:column; gap:15px; margin-top:20px;">
+                        <div>
+                            <label style="font-size:12px; color:var(--text-muted);">Número de destino (WhatsApp)</label>
+                            <div class="input-group" style="margin-top:5px;">
+                                <i class="fa-solid fa-mobile-screen"></i>
+                                <input type="tel" id="mkt-numero" placeholder="Ej: 987654321" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label style="font-size:12px; color:var(--text-muted);">Mensaje Predeterminado (Con enlace web)</label>
+                            <textarea id="mkt-mensaje" class="input-form" style="height: 120px; resize:none; margin-top:5px;" required>¡Hola! Somos SCenterPro 🎬📺. Tenemos una promoción especial para ti en Netflix, Disney+ y Max. ¡Pregúntanos por nuestros planes y no te pierdas tus series favoritas!&#10;&#10;Mira nuestras promociones y adquiere tu plan aquí: https://tu-dominio.com</textarea>
+                        </div>
+                        <div>
+                            <label style="font-size:12px; color:var(--text-muted);">Enlace de Imagen Extra (Déjalo en blanco si usas el de tu web)</label>
+                            <input type="url" id="mkt-imagen" class="input-form" style="margin-top:5px;" placeholder="Ej: https://i.imgur.com/imagen.jpg">
+                            <span style="font-size:10px; color:#f5a623;">*Tu página web ya generará la vista previa. Usa esto solo si quieres enviar un link directo a otra foto.</span>
+                        </div>
+                        <button type="submit" class="red-btn" style="background:#25D366; margin-top:10px;"><i class="fa-brands fa-whatsapp"></i> Enviar Publicidad</button>
+                    </form>
+                </div>
+
+                <div class="glass-panel" style="flex:2; min-width:300px; padding:30px; border-radius:20px; height: fit-content;">
+                    <h3 class="brand-white" style="margin-top:0;"><i class="fa-solid fa-chart-line"></i> Historial y Respuestas</h3>
+                    <div style="overflow-x: auto; max-height: 400px; margin-top:20px;">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Número</th>
+                                    <th>Mensaje Enviado</th>
+                                    <th>Estado</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody id="mkt-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- DASHBOARD CLIENTE                          -->
+        <!-- ========================================== -->
+        <div id="client-dashboard" class="dashboard-container hidden">
+            <header class="dashboard-header glass-panel">
+                <h2 class="brand-gradient" id="dashboard-title">Catálogo Stream Center Pro</h2>
+                <div class="header-actions">
+                    <button id="btn-catalogo" class="secondary-btn hidden"><i class="fa-solid fa-store"></i> Catálogo</button>
+                    <button id="btn-mis-servicios" class="secondary-btn"><i class="fa-solid fa-tv"></i> Mis Servicios</button>
+                    <button id="btn-carrito" class="secondary-btn"><i class="fa-solid fa-cart-shopping"></i> Mi Carrito<span id="cart-badge" class="badge">0</span></button>
+                    <button id="btn-perfil" class="secondary-btn"><i class="fa-solid fa-user"></i> Mi Perfil</button>
+                    <button class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Salir</button>
+                </div>
+            </header>
+            
+            <div id="catalogo-section" class="platforms-grid">
+                
+                <div class="platform-card netflix glass-panel" data-plataforma="Netflix">
+                    <div class="platform-header"><img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix"></div>
+                    <div class="plan-item" data-plan="Alquiler por Perfil" data-precio="10">
+                        <div class="plan-details"><span class="plan-name">Alquiler por Perfil</span><span class="plan-price">S/ 10.00</span></div>
+                        <button class="buy-btn">Adquirir</button>
+                    </div>
+                    <div class="plan-item special-plan" data-plan="Perfil Personalizado" data-precio="15">
+                        <div class="ribbon-oferta">✨ NUEVO</div>
+                        <div class="plan-details"><span class="plan-name">Perfil Personalizado</span><span style="font-size: 11px; color: var(--text-muted);">Usa tu propio correo</span><span class="plan-price">S/ 15.00</span></div>
+                        <button class="buy-btn" id="btn-netflix-custom">Adquirir</button>
+                    </div>
+                    <div class="plan-item" data-plan="Cuenta Completa (Premium)" data-precio="40">
+                        <div class="ribbon-popular">⭐ MÁS VENDIDO</div>
+                        <div class="plan-details"><span class="plan-name">Cuenta Completa (Premium)</span><span class="plan-price">S/ 40.00</span></div>
+                        <button class="buy-btn">Adquirir</button>
+                    </div>
+                </div>
+
+                <div class="platform-card disney glass-panel" data-plataforma="Disney+"><div class="platform-header"><img src="https://logodownload.org/wp-content/uploads/2020/11/disney-plus-logo-1.png" class="white-logo" alt="Disney+"></div><div class="plan-item" data-plan="Alquiler por Perfil" data-precio="10"><div class="plan-details"><span class="plan-name">Alquiler por Perfil</span><span class="plan-price">S/ 10.00</span></div><button class="buy-btn">Adquirir</button></div><div class="plan-item" data-plan="Cuenta Completa (Premium)" data-precio="30"><div class="plan-details"><span class="plan-name">Cuenta Completa (Premium)</span><span class="plan-price">S/ 30.00</span></div><button class="buy-btn">Adquirir</button></div><div class="plan-item special-plan" data-plan="Único Pago (Con tu correo)" data-precio="35"><div class="ribbon-oferta">🔥 MEJOR PRECIO</div><div class="plan-details"><span class="plan-name">Único Pago (Con tu correo)</span><span class="plan-price">S/ 35.00</span></div><button class="buy-btn">Adquirir</button></div></div>
+                <div class="platform-card max glass-panel" data-plataforma="HBO Max"><div class="platform-header"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Max_logo.svg" class="white-logo" alt="Max"></div><div class="plan-item" data-plan="Alquiler por Perfil" data-precio="10"><div class="plan-details"><span class="plan-name">Alquiler por Perfil</span><span class="plan-price">S/ 10.00</span></div><button class="buy-btn">Adquirir</button></div><div class="plan-item" data-plan="Cuenta Completa (Estándar)" data-precio="10"><div class="plan-details"><span class="plan-name">Cuenta Completa (Estándar)</span><span class="plan-price">S/ 10.00</span></div><button class="buy-btn">Adquirir</button></div><div class="plan-item special-plan" data-plan="Único Pago (Con tu correo)" data-precio="15"><div class="ribbon-oferta">🔥 MEJOR PRECIO</div><div class="plan-details"><span class="plan-name">Único Pago (Con tu correo)</span><span class="plan-price">S/ 15.00</span></div><button class="buy-btn">Adquirir</button></div></div>
+                <div class="platform-card amazon glass-panel" data-plataforma="Amazon Prime"><div class="platform-header"><img src="https://upload.wikimedia.org/wikipedia/commons/1/11/Amazon_Prime_Video_logo.svg" class="white-logo" alt="Amazon Prime"></div><div class="plan-item" data-plan="Alquiler por Perfil" data-precio="10"><div class="plan-details"><span class="plan-name">Alquiler por Perfil</span><span class="plan-price">S/ 10.00</span></div><button class="buy-btn">Adquirir</button></div><div class="plan-item" data-plan="Cuenta Completa" data-precio="12"><div class="plan-details"><span class="plan-name">Cuenta Completa</span><span class="plan-price">S/ 12.00</span></div><button class="buy-btn">Adquirir</button></div></div>
+                <div class="platform-card spotify glass-panel" data-plataforma="Spotify"><div class="platform-header"><img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg" class="white-logo" alt="Spotify"></div><div class="plan-item" data-plan="Alquiler por Perfil" data-precio="10"><div class="plan-details"><span class="plan-name">Alquiler por Perfil</span><span class="plan-price">S/ 10.00</span></div><button class="buy-btn">Adquirir</button></div></div>
+            </div>
+
+            <div id="mis-servicios-section" class="hidden"><div id="servicios-grid" class="platforms-grid"></div></div>
+
+            <div id="mi-perfil-section" class="hidden">
+                <div class="profile-card glass-panel">
+                    <div class="avatar-container">
+                        <img id="profile-img-preview" src="https://ui-avatars.com/api/?name=User&background=272a38&color=fff" alt="Avatar">
+                        <label for="avatar-upload" class="avatar-upload-btn"><i class="fa-solid fa-camera"></i></label>
+                        <input type="file" id="avatar-upload" accept="image/*" hidden>
+                    </div>
+                    <h3 class="brand-white" id="profile-username" style="margin-bottom:5px;">Cargando...</h3>
+                    <span style="color: #1DB954; font-size: 12px; font-weight: 700;"><i class="fa-solid fa-circle-check"></i> Miembro Verificado</span>
+                    <div class="profile-info-grid">
+                        <div class="input-group"><i class="fa-regular fa-envelope"></i><input type="email" id="profile-email" readonly class="readonly-input"></div>
+                        <div class="input-group"><i class="fa-solid fa-phone"></i><input type="tel" id="profile-phone" readonly class="readonly-input"></div>
+                    </div>
+                    <hr class="divider">
+                    <form id="form-cambio-password">
+                        <h4 style="text-align:left; margin-bottom:10px; color:var(--text-muted);">Seguridad de la cuenta</h4>
+                        <div class="input-group"><i class="fa-solid fa-lock"></i><input type="password" id="new-password" placeholder="Nueva Contraseña" required></div>
+                        <button type="submit" class="red-btn w-100" style="margin-bottom:15px;">Actualizar Contraseña</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel Lateral del Carrito -->
+    <div id="cart-sidebar" class="cart-sidebar glass-panel">
+        <div class="cart-header"><h3><i class="fa-solid fa-bag-shopping"></i> Tu Pedido</h3><button id="close-cart"><i class="fa-solid fa-times"></i></button></div>
+        <div id="cart-items" class="cart-items"></div>
+        <div class="cart-footer">
+            <div class="cart-total"><span>Total a pagar:</span><span id="cart-total-price" class="brand-gradient">S/ 0.00</span></div>
+            <button class="red-btn w-100" id="btn-pagar"><i class="fa-brands fa-whatsapp"></i> Generar Pedido Seguro</button>
+        </div>
+    </div>
+    <div id="cart-overlay" class="cart-overlay"></div>
+
+    <!-- MODAL DE VENTA MANUAL EXTERNA (ADMIN) -->
+    <div id="modal-venta" class="cart-overlay">
+        <div class="glass-panel" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 500px; padding: 30px; border-radius: 20px; z-index: 1001;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 class="brand-white" style="margin:0;"><i class="fa-solid fa-cash-register"></i> Registrar Venta Externa</h3>
+                <button id="cerrar-modal-venta" style="background:none; border:none; color:white; font-size:20px; cursor:pointer;"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <form id="form-venta-manual" style="display:flex; flex-direction:column; gap: 15px;">
+                <input type="text" id="vm-cliente" placeholder="Nombre del Cliente (Ej: Juan Perez)" class="input-form" required>
+                <select id="vm-servicio" class="input-form" required>
+                    <option value="">Selecciona el Servicio vendido...</option>
+                    <option value="Netflix (Alquiler por Perfil)">Netflix (Perfil Normal)</option>
+                    <option value="Netflix (Perfil Personalizado)">Netflix (Perfil Personalizado)</option>
+                    <option value="Netflix (Cuenta Completa)">Netflix (Cuenta Completa)</option>
+                    <option value="Disney+ (Alquiler por Perfil)">Disney+ (Alquiler por Perfil)</option>
+                    <option value="HBO Max (Alquiler por Perfil)">HBO Max (Alquiler por Perfil)</option>
+                    <option value="Amazon Prime (Alquiler por Perfil)">Amazon Prime (Alquiler por Perfil)</option>
+                    <option value="Spotify (Alquiler por Perfil)">Spotify (Alquiler por Perfil)</option>
+                </select>
+                <input type="number" id="vm-precio" placeholder="Precio Cobrado (Ej: 15.00 o 0 si es gratis)" step="0.01" class="input-form" required>
+                <input type="text" id="vm-correo-asig" placeholder="Correo Matriz Asignado (Ej: proveedor@gmail.com)" class="input-form" required>
+                <input type="text" id="vm-perfil-asig" placeholder="Nombre/Pin del Perfil (Opcional)" class="input-form">
+                <div style="display: flex; gap:10px;">
+                    <div style="flex:1;"><label style="font-size:12px; color:#9ba0b5;">Fecha Inicio</label><input type="date" id="vm-inicio" class="input-form" required></div>
+                    <div style="flex:1;"><label style="font-size:12px; color:#9ba0b5;">Fecha Fin</label><input type="date" id="vm-fin" class="input-form" required></div>
+                </div>
+                <button type="submit" class="red-btn" style="background: #1DB954; margin-top:10px;"><i class="fa-solid fa-save"></i> Guardar Venta</button>
+            </form>
+        </div>
+    </div>
+
+    <a href="https://wa.me/51922096440?text=Hola,%20necesito%20ayuda" class="floating-whatsapp" target="_blank" title="Soporte por WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+    <footer>creado por AdonaHack</footer>
+    <script type="module" src="app.js?v=16"></script>
+</body>
+</html>
